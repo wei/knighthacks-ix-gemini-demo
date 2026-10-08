@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "knighthacks-ix-gemini-demo",
+  "main": "app.py",
+  "compatibility_date": "2026-10-08",
+  "compatibility_flags": [
+    "python_workers"
+  ],
+  "python_modules": {
+    "exclude": [
+      "**/tests/**",
+      "**/test/**",
+      "**/*.pyc",
+      "**/__pycache__/**"
+    ]
+  }
+}

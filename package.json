@@ -1,0 +1,14 @@
+{
+  "name": "knighthacks-ix-gemini-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Flask app running on Cloudflare Python Workers with Gemini AI",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "sync": "uvx --from workers-py pywrangler sync"
+  },
+  "devDependencies": {
+    "wrangler": "^4.149.0"
+  }
+}

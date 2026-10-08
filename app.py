@@ -1,16 +1,38 @@
 import os
 from flask import Flask, render_template, request, jsonify
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import markdown
 from google import genai
 
-load_dotenv()
-
 app = Flask(__name__)
 
-# Initialize Gemini Client
-api_key = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=api_key)
+def get_gemini_client():
+    api_key = None
+    try:
+        from workers import env
+        api_key = getattr(env, "GEMINI_API_KEY", None)
+    except Exception:
+        pass
+
+    if not api_key:
+        try:
+            workers_env = request.environ.get("workers.env")
+            if workers_env:
+                api_key = getattr(workers_env, "GEMINI_API_KEY", None)
+        except Exception:
+            pass
+
+    if not api_key:
+        api_key = os.getenv("GEMINI_API_KEY")
+
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY not configured")
+
+    return genai.Client(api_key=api_key)
 
 TRACKS = [
     {
@@ -146,11 +168,13 @@ For each selected prize category ({prizes_text}), give a concrete, bulleted tech
 - **Phase 1 (Hours 0-12):** Core setup & data flows
 - **Phase 2 (Hours 12-24):** Integrations & UI polish
 - **Phase 3 (Hours 24-36):** Pitch deck, 3-minute video demo & live edge-case safeguards
+- **Phase 4 (Final Stretch):** Rehearse your demo flow with mentors
 
 ### 🌟 Lenny & Koala's Winning Hack Tip
 A short, motivational secret weapon tip from Lenny & Keyboard Koala to win over judges during demo time!
 """
 
+        client = get_gemini_client()
         response = client.models.generate_content(
             model="gemini-flash-lite-latest",
             contents=prompt
@@ -208,6 +232,7 @@ Respond as Lenny & Keyboard Koala. Give high-energy, tactical, technical, and mo
 Remember: Format your output in markdown without any HTML tags. Do not use tables. Keep code snippets concise and directly usable.
 """
 
+        client = get_gemini_client()
         response = client.models.generate_content(
             model="gemini-flash-lite-latest",
             contents=prompt
@@ -224,6 +249,12 @@ Remember: Format your output in markdown without any HTML tags. Do not use table
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+
+try:
+    from workers import wsgi
+    Default = wsgi.entrypoint(app)
+except ImportError:
+    pass
 
 if __name__ == '__main__':
     # Listen on all interfaces so ngrok and local testing work smoothly
