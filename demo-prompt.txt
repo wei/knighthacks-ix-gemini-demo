@@ -1,0 +1,58 @@
+Create a Flask web app in one shot for "Knight Hacks IX Strategist", styled after the official Knight Hacks IX website (2026.knighthacks.org).
+
+## Event Context:
+Knight Hacks IX is the University of Central Florida's premier annual 36-hour hackathon in Orlando, FL (October 9 - 11, 2026), bringing together over 1,000+ hackers to build, learn, and create together as Florida's best hackathon. The theme is an enchanted woodland / mystic twilight forest filled with ancient runes, fireflies, and mystical woodland creatures.
+
+## Knight Hacks Theme & Styling (2026.knighthacks.org):
+- Mystical Twilight Forest & Rune aesthetic:
+  * Colors & Gradients: Deep Night Forest backdrop (#0A0D14 / #0F172A / #13111C), Luminous Pale Moss & Parchment highlight (#EEF6CF), Mystic Violet & Enchanted Lilac drift accents (#8752F0 / #9B6DFF / #B47AFF / #D19AFF), Bioluminescent Cyan/Emerald wisps (#5EEAD4 / #10B981), Amber Firefly Glow (#FBBF24), Dark Glassmorphic Card surfaces (rgba(15, 23, 42, 0.75)).
+  * Graphic Motifs: Swirling mystical purple leaves, canopy branches, glowing ancient rune stones, fireflies/floating wisps, and hanging parchment paper track markers.
+  * UI Elements: Floating dark glassmorphic navigation with glowing border accents (`rounded-full bg-slate-900/80 backdrop-blur-md border border-purple-500/20`), pill badges with soft mystical glow, enchanted forest interactive cards with hover luminance, and parchment-style track badges.
+- Assets:
+  * Knight Hacks Logo (white SVG): https://assets.knighthacks.org/khix/khlogosinglewhite.svg
+  * Knight Hacks Full Logo: https://assets.knighthacks.org/khix/khlogo.svg
+  * Knight Hacks Mascot (Lenny): https://assets.knighthacks.org/khix/faq-lennyblink-lennyblink.webp
+  * MLH 2027 Mascot (Keyboard Koala): https://transfer.whe.app/ACU6W/keyboard_koala_transparent.png
+  * MLH Trust Badge (White SVG): https://logged-assets.s3.amazonaws.com/trust-badge/2027/mlh-trust-badge-2027-white.svg
+  * Glowing Moss Rock: https://assets.knighthacks.org/khix/about-rock-glow.webp
+  * Canopy Branch: https://assets.knighthacks.org/khix/branch-3.webp
+  * Enchanted Leaf: https://assets.knighthacks.org/khix/leaf-2.webp
+
+## Mobile-First & Responsive UX:
+- Optimized primarily for mobile phones (single-column, no horizontal overflow, 44px+ touch targets).
+- Clean desktop expansion (max-w-4xl, centered layout).
+- Tap-friendly track and prize selectors with active glowing state.
+- Sticky/accessible bottom chat input bar with auto-scrolling message container.
+
+## Technical Requirements:
+- Python Flask backend with Google Gemini (`model="gemini-flash-lite-latest"`).
+- Frontend: Tailwind CSS (CDN) + AJAX (fetch) without full page reloads.
+- Use Python `markdown` package to render Gemini responses into clean HTML.
+
+## App Workflow:
+1. User selects 1 Knight Hacks Track and multiple MLH Prize Categories.
+2. User taps "Generate Idea" (shows enchanted forest / firefly-themed loading state).
+3. Gemini crafts a tailored project idea integrating technologies for each selected prize and explaining relevance to the chosen track.
+4. Unlocks interactive chat to brainstorm and drill into implementation details with Lenny & Keyboard Koala.
+
+## Persona (Lenny & Keyboard Koala):
+- Name: Lenny & Keyboard Koala (Knight Hacks & MLH Mascots)
+- Role: Elite hackathon mentors & coaches (veteran champions with 20+ hackathons under their belt).
+- Tone: High-energy, encouraging, tactical, and mystical. Delivers concise, actionable, mobile-scannable advice (avoid tables).
+
+## Available Knight Hacks Tracks:
+- Hello World (Beginners & First-Time Hackers)
+- Artificial Intelligence / Machine Learning
+- App Development
+- Game Development
+- Embedded Software
+
+## MLH Prize Categories at Knight Hacks IX:
+- Best Use of Gemini API – MLH Swag Kits; push the boundaries of AI using Google Gemini to build intelligent chatbots, multimodal assistants, or analysis tools.
+- Best Use of ElevenLabs – Wireless Earbuds; deploy natural, human-sounding audio and realistic, emotionally expressive voices.
+- Best Use of Solana – Assorted Prizes; leverage high-speed execution and near-zero transaction costs for scalable decentralized applications.
+- Best Use of Tiger Data – Stream Deck Mini; extend PostgreSQL for ultra-fast real-time data, time-series metrics, continuous aggregates, and analytics.
+- Best Use of Presage – Fitbit Inspire & Presage Perks; Human Sensing Layer for vital signs, movement, emotion, and facial expressions via camera.
+- Best Use of Vultr – M5Stack Official Tab5; deploy scalable cloud compute and specialized Vultr Cloud GPUs for high-performance workloads.
+- Best Domain Name from GoDaddy Registry – Digital Gift Card; register domain name to give project a home.
+Resource link: https://www.mlh.com/events/knight-hacks-ix/prizes
